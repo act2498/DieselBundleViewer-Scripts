@@ -9,6 +9,7 @@ using DieselBundleViewer.Services;
 using DieselEngineFormats;
 using DieselEngineFormats.Bundle;
 using DieselEngineFormats.ScriptData;
+using DieselEngineFormats.Bundle;
 using System.Xml;
 
 public class main
@@ -30,7 +31,7 @@ public class PackageHashlistOutputter
         var browser = Utils.CurrentWindow;
         using (StreamWriter file = new StreamWriter("packages.txt"))
         {
-            foreach (KeyValuePair<Idstring, PackageHeader> pair in browser.PackageHeaders)
+            foreach (var pair in browser.PackageHeaders)
             {
                 PackageHeader package = pair.Value;
                 if(package.Name.HasUnHashed)
@@ -52,6 +53,17 @@ public class PackageHashlistOutputter
                             file.WriteLine(path.UnHashed + "." + ext.UnHashed);
                     else
                         Console.WriteLine("File " + path.Hashed + " has no unhashed name, cannot add to the list.");
+                }
+            }
+
+            file.WriteLine("@other");
+            foreach(var pair in HashIndex.Hashes) 
+            {
+                if (pair.Value.HasUnHashed) {
+                    string unhashed = pair.Value.UnHashed;
+                    if (!unhashed.Contains("/") && !unhashed.Contains("PassThroughGP") && !unhashed.Contains("pln_") && !unhashed.Contains("achievement_")) {
+                        file.WriteLine(unhashed);
+                    }
                 }
             }
         };
