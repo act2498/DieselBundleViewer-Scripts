@@ -37,12 +37,12 @@ public class PackageHashlistOutputter
                 if(package.Name.HasUnHashed)
                 {
                     file.WriteLine("@"+package.Name);
-                    Console.WriteLine("Current pacakge " + package.Name.UnHashed);
+                    Console.WriteLine("Current package " + package.Name.UnHashed);
                 }
                 else
                 {
-                    Console.WriteLine("Current pacakge " + package.Name.Hashed);
-                    Console.WriteLine("[Warning] no unhashed name, cannot add this pacakge to the list.");
+                    Console.WriteLine("Current package " + package.Name.Hashed);
+                    Console.WriteLine("[Warning] no unhashed name, cannot add this package to the list.");
                 }
                 foreach(PackageFileEntry entry in package.Entries)
                 {
@@ -57,11 +57,11 @@ public class PackageHashlistOutputter
             }
 
             file.WriteLine("@other");
-            foreach(var pair in HashIndex.Hashes) 
+            foreach(var pair in HashIndex.hashes) 
             {
                 if (pair.Value.HasUnHashed) {
                     string unhashed = pair.Value.UnHashed;
-                    if (!unhashed.Contains("/") && !unhashed.Contains("PassThroughGP") && !unhashed.Contains("pln_") && !unhashed.Contains("achievement_")) {
+                    if (!unhashed.Contains("/") && !unhashed.Contains("PassThroughGP") && !unhashed.Contains("pln_") && !unhashed.Contains("achievement_") && !unhashed.Contains(":") && !unhashed.Contains("@") && !unhashed.Contains(".") ) {
                         file.WriteLine(unhashed);
                     }
                 }
