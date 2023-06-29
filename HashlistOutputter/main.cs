@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,3 +39,4 @@ public class HashlistOutputter
         HashIndex.GenerateHashList("./FullHashlist");
     }
 }
+
